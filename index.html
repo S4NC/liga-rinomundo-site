@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liga Rinomundo</title>
+<style>
+  :root{
+    --tinta:#241a2e;
+    --tinta-suave:#5c4f6b;
+    --linea:#e4dbee;
+    --fondo:#f8f3fb;
+    --superficie:#ffffff;
+    --morado:#532176;
+    --morado-fuerte:#3b1754;
+    --ambar:#b9822f;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --tinta:#efe8f5;
+      --tinta-suave:#bfb0cf;
+      --linea:#3a2c4a;
+      --fondo:#181120;
+      --superficie:#21172c;
+      --morado:#c79ee8;
+      --morado-fuerte:#e3c8f7;
+      --ambar:#e0ac5c;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --tinta:#efe8f5;
+    --tinta-suave:#bfb0cf;
+    --linea:#3a2c4a;
+    --fondo:#181120;
+    --superficie:#21172c;
+    --morado:#c79ee8;
+    --morado-fuerte:#e3c8f7;
+    --ambar:#e0ac5c;
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  body{
+    background:var(--fondo);
+    color:var(--tinta);
+    font-family:"Inter",system-ui,-apple-system,sans-serif;
+    padding-inline:20px;
+  }
+  img{max-width:100%;}
+  h1,h2,h3,.wordmark{
+    font-family:"Sora",system-ui,-apple-system,sans-serif;
+    text-wrap:balance;
+  }
+  a{color:var(--morado-fuerte);}
+
+  header{
+    position:sticky;
+    top:0;
+    background:var(--fondo);
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding-block:16px;
+    border-bottom:1px solid var(--linea);
+    max-width:680px;
+    margin-inline:auto;
+    z-index:5;
+  }
+  .wordmark{
+    font-size:1.05rem;
+    font-weight:700;
+    color:var(--morado-fuerte);
+    letter-spacing:0.01em;
+  }
+  .wordmark span{color:var(--ambar);}
+  nav{display:flex; gap:4px; background:var(--superficie); border:1px solid var(--linea); border-radius:999px; padding:4px;}
+  nav button{
+    font:inherit;
+    font-size:0.85rem;
+    font-weight:600;
+    border:none;
+    background:transparent;
+    color:var(--tinta-suave);
+    padding:7px 14px;
+    border-radius:999px;
+    cursor:pointer;
+  }
+  nav button[aria-current="true"]{background:var(--morado); color:#fff;}
+
+  main{max-width:680px; margin-inline:auto; padding-block:36px 64px;}
+  section{display:none;}
+  section[aria-current="true"]{display:block;}
+
+  .eyebrow{
+    font-size:0.75rem;
+    font-weight:700;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ambar);
+    margin:0 0 8px;
+  }
+  h1{font-size:clamp(1.7rem,4vw,2.2rem); margin:0 0 6px; color:var(--morado-fuerte);}
+  h2{font-size:1.15rem; margin:2em 0 0.5em; color:var(--morado-fuerte);}
+  p{line-height:1.65; color:var(--tinta); max-width:65ch;}
+  .meta{color:var(--tinta-suave); font-size:0.9rem; margin-top:0;}
+
+  .tarjetas{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-block:28px;}
+  .tarjeta{background:var(--superficie); border:1px solid var(--linea); border-radius:14px; padding:16px 18px;}
+  .tarjeta h3{font-size:0.95rem; margin:0 0 4px; color:var(--tinta);}
+  .tarjeta p{font-size:0.88rem; margin:0; color:var(--tinta-suave);}
+
+  .contacto{
+    background:var(--superficie);
+    border:1px solid var(--linea);
+    border-radius:14px;
+    padding:18px 20px;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-top:28px;
+  }
+  .contacto code{font-size:0.95rem;}
+  .contacto button{
+    font:inherit; font-size:0.82rem; font-weight:600;
+    border:1px solid var(--morado); color:var(--morado-fuerte); background:transparent;
+    padding:7px 14px; border-radius:999px; cursor:pointer;
+  }
+  .contacto button:active{background:var(--linea);}
+
+  ul{padding-left:1.15em; color:var(--tinta);}
+  li{line-height:1.6; margin-bottom:6px;}
+  ol{padding-left:1.3em; color:var(--tinta);}
+  ol li{margin-bottom:14px;}
+
+  footer{max-width:680px; margin:0 auto; padding-block:24px 40px; border-top:1px solid var(--linea); color:var(--tinta-suave); font-size:0.8rem;}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+  <div class="wordmark">Liga<span>·</span>Rinomundo</div>
+  <nav id="nav">
+    <button data-tab="inicio" aria-current="true">Inicio</button>
+    <button data-tab="privacidad">Privacidad</button>
+    <button data-tab="terminos">Términos</button>
+  </nav>
+</header>
+
+<main>
+  <section id="inicio" aria-current="true">
+    <p class="eyebrow">Bogotá, Colombia</p>
+    <h1>Liga Rinomundo</h1>
+    <p class="meta">Decisiones, estrategia y conexiones alrededor de Rinomundo.</p>
+    <p>Liga Rinomundo convoca y organiza mesas presenciales para comunidades de emprendedores, empresarios y líderes de negocio, usando el tablero <strong>Rinomundo</strong> como punto de partida para decidir, negociar, adaptarse y conversar.</p>
+
+    <div class="tarjetas">
+      <div class="tarjeta">
+        <h3>Qué hacemos</h3>
+        <p>Organizamos experiencias de juego en mesa que ponen decisiones reales sobre la mesa.</p>
+      </div>
+      <div class="tarjeta">
+        <h3>Dónde operamos</h3>
+        <p>Bogotá, Colombia, con comunidades aliadas de distintos sectores.</p>
+      </div>
+      <div class="tarjeta">
+        <h3>Presencia</h3>
+        <p>Instagram, Facebook y TikTok, con contenido semanal sobre la experiencia.</p>
+      </div>
+    </div>
+
+    <h2>Sobre esta página</h2>
+    <p>Esta página existe para que las plataformas con las que integramos nuestras cuentas (como TikTok) puedan verificar quiénes somos y cómo tratamos los datos que leemos de nuestras propias cuentas. Los detalles están en <a href="#" data-tab="privacidad">Privacidad</a> y <a href="#" data-tab="terminos">Términos</a>.</p>
+
+    <div class="contacto">
+      <div>
+        <div class="meta" style="margin-bottom:2px;">Contacto</div>
+        <code id="correo">ligarinomundo@gmail.com</code>
+      </div>
+      <button id="copiar" type="button">Copiar correo</button>
+    </div>
+  </section>
+
+  <section id="privacidad">
+    <p class="eyebrow">Vigente desde el 22 de septiembre de 2026</p>
+    <h1>Política de privacidad</h1>
+    <p>Esta política describe qué datos lee y guarda Liga Rinomundo al conectar sus propias cuentas de redes sociales (Instagram, Facebook y TikTok) con herramientas internas de análisis de contenido.</p>
+
+    <h2>1. Quiénes somos</h2>
+    <p>Liga Rinomundo es un proyecto con sede en Bogotá, Colombia, que organiza experiencias presenciales alrededor del tablero Rinomundo. Puedes escribirnos a <code>ligarinomundo@gmail.com</code> para cualquier pregunta sobre esta política.</p>
+
+    <h2>2. Qué datos leemos</h2>
+    <ul>
+      <li>Métricas agregadas y públicas de nuestras propias publicaciones: alcance, vistas, me gusta, comentarios, guardados y compartidos.</li>
+      <li>El conteo de seguidores de nuestras propias cuentas.</li>
+      <li>El nombre de usuario y tipo de cuenta asociados al perfil que autoriza el acceso.</li>
+    </ul>
+    <p>No leemos ni almacenamos datos personales de terceros (por ejemplo, de quienes comentan o siguen nuestras cuentas), más allá de las cifras agregadas que las propias plataformas entregan.</p>
+
+    <h2>3. Para qué los usamos</h2>
+    <p>Únicamente para planear y evaluar nuestro propio contenido: qué formatos y temas repetir, y si nuestras publicaciones cumplen las metas internas de la Liga.</p>
+
+    <h2>4. Con quién los compartimos</h2>
+    <p>No vendemos ni compartimos estos datos con terceros. Se usan de forma interna por el equipo de Liga Rinomundo.</p>
+
+    <h2>5. Dónde se guardan</h2>
+    <p>Las cifras se guardan en archivos internos del equipo, junto con los tokens de acceso necesarios para leerlas, protegidos y sin publicarse. Conservamos el histórico mientras nos sirva para comparar el rendimiento del contenido a lo largo del tiempo.</p>
+
+    <h2>6. Tus opciones</h2>
+    <p>Si autorizaste el acceso desde una de nuestras cuentas y quieres revocarlo, puedes hacerlo en cualquier momento desde la configuración de apps y sitios web de cada red social. Para solicitar la eliminación de los datos que guardamos, escríbenos al correo de contacto.</p>
+
+    <h2>7. Cambios a esta política</h2>
+    <p>Si actualizamos esta política, cambiaremos la fecha de vigencia al inicio de esta sección.</p>
+  </section>
+
+  <section id="terminos">
+    <p class="eyebrow">Vigente desde el 22 de septiembre de 2026</p>
+    <h1>Términos de uso</h1>
+    <p>Estos términos aplican a esta página informativa de Liga Rinomundo y a las integraciones que registramos con plataformas externas.</p>
+
+    <h2>1. Propósito de la página</h2>
+    <p>Esta página identifica a Liga Rinomundo ante plataformas externas (como TikTok, Meta e Instagram) durante el registro de integraciones de solo lectura sobre nuestras propias cuentas. No es una tienda, no procesa pagos ni recolecta datos de visitantes más allá de lo que tu navegador guarda localmente por tu cuenta.</p>
+
+    <h2>2. Uso permitido</h2>
+    <ol>
+      <li>Puedes consultar esta página libremente para verificar nuestra identidad y nuestra política de datos.</li>
+      <li>No está permitido usar el nombre o los activos de Liga Rinomundo para representar a otra organización o proyecto.</li>
+    </ol>
+
+    <h2>3. Sin garantías</h2>
+    <p>La información de esta página se ofrece "tal cual", con el fin de cumplir requisitos de registro técnico. Puede actualizarse sin aviso previo a medida que cambian nuestras integraciones.</p>
+
+    <h2>4. Ley aplicable</h2>
+    <p>Estos términos se interpretan conforme a las leyes de Colombia, sede de operación de Liga Rinomundo.</p>
+
+    <h2>5. Contacto</h2>
+    <p>Preguntas sobre estos términos: <code>ligarinomundo@gmail.com</code>.</p>
+  </section>
+</main>
+
+<footer>
+  Liga Rinomundo · Bogotá, Colombia · Página de referencia para integraciones técnicas.
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('#nav button');
+  const sections = document.querySelectorAll('main > section');
+  function ir(id, push){
+    tabs.forEach(b => b.setAttribute('aria-current', String(b.dataset.tab === id)));
+    sections.forEach(s => s.setAttribute('aria-current', String(s.id === id)));
+    if (push) history.replaceState(null, '', '#' + id);
+  }
+  tabs.forEach(b => b.addEventListener('click', () => ir(b.dataset.tab, true)));
+  document.querySelectorAll('a[data-tab]').forEach(a => a.addEventListener('click', (e) => {
+    e.preventDefault(); ir(a.dataset.tab, true);
+  }));
+  const inicial = ['inicio','privacidad','terminos'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'inicio';
+  ir(inicial, false);
+
+  document.getElementById('copiar').addEventListener('click', async () => {
+    const btn = document.getElementById('copiar');
+    const texto = document.getElementById('correo').textContent;
+    try {
+      await navigator.clipboard.writeText(texto);
+      btn.textContent = 'Copiado';
+    } catch {
+      const r = document.createRange(); r.selectNode(document.getElementById('correo'));
+      getSelection().removeAllRanges(); getSelection().addRange(r);
+      btn.textContent = 'Selecciona y copia';
+    }
+    setTimeout(() => btn.textContent = 'Copiar correo', 1800);
+  });
+</script>
+</body>
+</html>
